@@ -1,0 +1,29 @@
+# scrollback
+defscrollback 8000
+
+escape ^Jj
+#bind ^A other
+
+bindkey ^[Od prev
+bindkey ^[Oc next
+
+
+bindkey "^[[5;2~" eval "copy" "stuff ^b"
+bindkey -m "^[[5;2~" stuff ^b
+bindkey -m "^[[6;2~" stuff ^f
+
+bind 'l' windowlist -b
+
+# Create initial windows
+screen 0
+screen -t mutt 1
+screen -t vifm 1
+screen -t ncmpc 1
+screen -t rtorrent 1
+
+select 0
+
+hardstatus string "%{= Kw}%-w%{= Ky}%{+b}%n %t*%{= Kw}%+w"
+hardstatus alwayslastline
+startup_message off
+

@@ -1,0 +1,5 @@
+# Write your default config options here!
+ass=yes
+embeddedfonts=yes
+#fontconfig=yes
+slang=fr,en

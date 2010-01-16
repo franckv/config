@@ -1,0 +1,8 @@
+include "/usr/share/themes/MurrinaAquaIsh/gtk-2.0/gtkrc"
+
+gtk-icon-theme-name = "Tango"
+
+gtk-xft-antialias = 1
+gtk-xft-hinting = 1
+gtk-xft-hintstyle = "hintfull"
+gtk-xft-rgba = "none"

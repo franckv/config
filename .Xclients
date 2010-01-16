@@ -1,0 +1,9 @@
+#!/bin/sh
+
+xmodmap .Xmodmap
+xsetroot -solid black
+
+scim -d&
+/usr/lib/wicd/wicd-client.py &
+
+exec ck-launch-session /usr/bin/awesome
