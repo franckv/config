@@ -10,7 +10,6 @@ require("naughty")
 require("eminent")
 
 -- Custom libraries
-require("lib/mpd")
 require("widgets")
 
 -- {{{ Variable definitions
@@ -21,20 +20,6 @@ beautiful.init("/home/franck/.config/awesome/theme.lua")
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
-screen_cmd = "urxvt -e screen -RD"
-dmenucmd = "dmenu_run -b -fn '-*-profont-*-*-*-*-11-*-*-*-*-*-*-*' -nb '#111111' -nf '#eeeeee' -sb '#6666ff' -sf '#ffffff'"
-browser = "firefox"
---chat = "pidgin"
-chat = "pidgin"
-audio_player = "sonata"
-ssaver = "xlock"
-vol_down = "amixer sset 'Master' 5%-"
-vol_up = "amixer sset 'Master' 5%+"
-vol_toggle = "amixer sset 'Master' toggle"
-sleep = "sudo pm-hibernate"
-suspend = "sudo pm-suspend"
-reboot = "sudo reboot"
-shutdown = "sudo poweroff"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -46,6 +31,7 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
+    awful.layout.suit.max,
     awful.layout.suit.tile,
     awful.layout.suit.floating,
     awful.layout.suit.tile.left,
@@ -55,7 +41,6 @@ layouts =
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
 }
@@ -66,7 +51,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "main", "www", "audio", "video", "chat", "files", "net", 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag({ "main", "www", "audio", "video", "chat", "files", "office", "net", 9 }, s, layouts[1])
 end
 -- }}}
 
@@ -94,19 +79,6 @@ mytextclock = awful.widget.textclock({ align = "right" })
 
 -- Create a systray
 mysystray = widget({ type = "systray" })
-
--- battery_widget
-mybatterywidget = widget({type = "textbox"})
-batteryInfo("BAT0")
-
--- mpd widget
-mpdwidget = widget({ type = "textbox" })
-mpdwidget:buttons({awful.button({ }, 1, function () mpd.toggle_play() end)})
-mpdInfo()
-
--- FS WIDget
-fswidget = widget({ type = "textbox" })
-fsInfo("[/:${/ used}/${/ size} ~:${/home used}/${/home size}] ")
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -179,9 +151,9 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
-        mybatterywidget,
-        fswidget,
-        mpdwidget,
+        widgets.batterywidget,
+        widgets.fswidget,
+        widgets.mpdwidget,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
@@ -251,22 +223,10 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end),
-
-    -- Media keys
-    awful.key({ },  "XF86AudioRaiseVolume", function () awful.util.spawn(vol_up) end),
-    awful.key({ },  "XF86AudioLowerVolume", function () awful.util.spawn(vol_down) end),
-    awful.key({ },  "XF86AudioMute", function () awful.util.spawn(vol_toggle) end),
-    --awful.key({ },  "XF86Eject", function () awful.util.spawn("eject") end),
-    awful.key({ },  "XF86AudioMedia", function () awful.util.spawn(audio_player) end),
-    awful.key({ },  "XF86AudioPlay", function () mpd.toggle_play() end),
-    awful.key({ },  "XF86HomePage", function () awful.util.spawn(browser) end),
-    awful.key({ },  "XF86ScreenSaver", function () awful.util.spawn(ssaver) end),
-    awful.key({ },  "XF86Sleep", function () awful.util.spawn(sleep) end),
-
-    awful.key({ modkey },  "p", function () awful.util.spawn(dmenucmd) end),
-    awful.key({ "Mod1" , "Control"}, "Escape", function () awful.util.spawn("xkill") end)
+              end)
 )
+
+require("binds")
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
@@ -349,19 +309,10 @@ awful.rules.rules = {
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
-    --
-    --  CUSTOM
-
-    { rule = { class = "Navigator" }, properties = { tag = tags[1][2] } },
-    { rule = { class = "Sonata" }, properties = { tag = tags[1][3] } },
-    { rule = { class = "Vlc" }, properties = { tag = tags[1][4] } },
-    { rule = { class = "Pidgin" }, properties = { tag = tags[1][5] } },
-    { rule = { class = "Pcmanfm" }, properties = { tag = tags[1][6] } },
-    { rule = { class = "Wicd-client.py" }, properties = { tag = tags[1][7] } },
-
-    --  END CUSTOM
 }
 -- }}}
+
+require("rules")
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
@@ -392,20 +343,4 @@ end)
 
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
-
--- {{{
-
-batTimer = timer {timeout = 20}
-batTimer:add_signal("timeout", function() batteryInfo("BAT0") end)
-batTimer:start()
-
-mpdTimer = timer {timeout = 2}
-mpdTimer:add_signal("timeout", function() mpdInfo() end)
-mpdTimer:start()
-
-fsTimer = timer {timeout = 30}
-fsTimer:add_signal("timeout", function() fsInfo('[/:${/ used}/${/ size} ~:${/home used}/${/home size}] ') end)
-fsTimer:start()
-
 -- }}}
