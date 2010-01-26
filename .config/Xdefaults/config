@@ -1,0 +1,36 @@
+!! Colours
+#include "/home/franck/.config/Xdefaults/themes/darklol"
+
+!! XFT && Fonts
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: full
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+
+*font:  xft:Terminus:pixelsize=12
+*boldFont: xft:Terminus:bold:pixelsize=12
+*italicFont: xft:Terminus:italic:pixelsize=12
+*bolditalicFont: xft:Terminus:bold:italic:pixelsize=12
+
+!! Terminal
+URxvt.urlLauncher: firefox
+
+URxvt*scrollBar: false
+URxvt*internalBorder: 0
+
+URxvt*foreground: #D6D8D9
+URxvt*inheritPixmap: true
+URxvt*transparent: true
+URxvt*colorUL: #86a2be
+URxvt*buffered: true
+URxvt*background: #1C1C20
+URxvt*cursorColor: white
+URxvt*underlineColor: yellow
+URxvt*urgentOnBell: true
+URxvt*saveLines: 1000
+URxvt*shading: 30
+URxvt*tintColor: white
+URxvt*imLocale: fr.FR.UTF-8
+URxvt*mouseWheelScrollPage: True
+

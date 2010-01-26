@@ -2,8 +2,9 @@
 
 xmodmap .Xmodmap
 xsetroot -solid black
+xrdb -merge /home/franck/.Xdefaults
 
 scim -d&
-/usr/lib/wicd/wicd-client.py &
+wicd-client &
 
-exec ck-launch-session /usr/bin/awesome
+exec $1

@@ -1,0 +1,32 @@
+!Black
+*color0: #1C1C20
+!Dark Grey
+*color8: #4d4d4d
+!Dark Red
+*color1: #CE5C00
+!Light Red
+*color9: #F57900
+!Dark Green
+*color2: #B7CE42
+!Light Green
+*color10: #BDE077
+!Dark Yellow
+*color3: #B88B10
+!Light Yellow
+*color11: #FFC135
+!Dark Blue
+*color4: #66AABB
+!Light Blue
+*color12: #AACCBB
+!Dark Magenta
+*color5: #B7416E
+!Light Magenta
+*color13: #BB4466
+!Dark Cyan
+*color6: #5E7175
+!Light Cyan
+*color14: #A3BABF
+!Light Grey
+*color7: #D6D8D9
+!White
+*color15: #6C887A
