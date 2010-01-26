@@ -10,13 +10,16 @@ set laststatus=2
 set pastetoggle=<F5>
 set statusline=[%02n]\ %(%M%R%H%)\ %F\ %=<%l,%c%V>\ %P
 set wildmenu
-set is ic
+set is ic hls
 set sm
 set dir=/tmp///
 set mps+=<:>
 set bg=dark
 set mouse=
 set backupcopy=yes
+
+set so=3
+set cursorline
 
 "let &termencoding=&encoding
 "set encoding=utf-8
@@ -28,6 +31,8 @@ filetype plugin on
 map ,v :e ~/.vimrc<CR>
 map ,u :so ~/.vimrc<CR>
 map ,ceol :%s/\s\+$//
+
+nmap Y y$
 
 autocmd BufEnter * lcd %:p:h 
 autocmd BufNewFile,BufRead *.py map <buffer> <F12> :w!<cr>:!python %<cr>
