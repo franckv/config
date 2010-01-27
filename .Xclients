@@ -7,4 +7,6 @@ xrdb -merge /home/franck/.Xdefaults
 scim -d&
 wicd-client &
 
+urxvt -e screen -RD&
+
 exec $1
