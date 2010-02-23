@@ -9,4 +9,4 @@ wicd-client &
 
 urxvt -e screen -RD&
 
-exec $1 > /tmp/cdm.log
+exec $1 > /tmp/cdm.log 2>&1
