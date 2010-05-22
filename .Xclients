@@ -6,7 +6,7 @@ xrdb -merge /home/franck/.Xdefaults
 
 scim -d&
 wicd-client &
-
+mpd .config/mpd/config &
 urxvt -e screen -RD&
 
 exec $1 > /tmp/cdm.log 2>&1
