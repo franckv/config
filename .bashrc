@@ -79,7 +79,8 @@ echo -e "$(pacman -Ss $@ | sed \
 }
 
 export EDITOR="vim"
-export PAGER="most -S"
+#export PAGER="most -S"
+export PAGER="vimpager"
 export LESSCHARSET=utf-8
 
 export LANG="fr_FR.utf8"
