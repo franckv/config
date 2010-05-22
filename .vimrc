@@ -1,6 +1,6 @@
 set nocp
 set vb t_vb=
-set sw=4 sts=4
+set ts=4 sw=4 sts=4
 set et
 set backspace=indent,eol,start
 set autoindent
@@ -19,7 +19,7 @@ set mouse=
 set backupcopy=yes
 
 set so=3
-set cursorline
+"set cursorline
 
 "let &termencoding=&encoding
 "set encoding=utf-8
