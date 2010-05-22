@@ -5,6 +5,8 @@ local table = table
 local math = math
 local tonumber = tonumber
 local awful = require("awful")
+local beautiful = require("beautiful")
+local naughty = require("naughty")
 local widget = widget
 local timer = timer
 require("lib/mpd")
@@ -14,7 +16,7 @@ module("widgets")
 
 batterywidget = widget({ type = "textbox" })
 mpdwidget = widget({ type = "textbox" })
-mpdwidget:buttons({awful.button({ }, 1, function () mpd.toggle_play() end)})
+mpdwidget:buttons(awful.button({ }, 1, function () mpd.toggle_play() end))
 fswidget = widget({ type = "textbox" })
 
 function setFg(color, text)
@@ -149,3 +151,10 @@ fsTimer = timer {timeout = 30}
 fsTimer:add_signal("timeout", function() fsInfo('[/:${/ used}/${/ size} ~:${/home used}/${/home size}] ') end)
 fsTimer:start()
 
+naughty.notify({ title      = "Widgets loaded"
+     , text       = "Widgets loaded"
+     , timeout    = 5
+     , position   = "top_right"
+     , fg         = beautiful.fg_focus
+     , bg         = beautiful.bg_focus })
+ 
