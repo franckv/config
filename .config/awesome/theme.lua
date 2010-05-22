@@ -74,7 +74,6 @@ theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/defau
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- You can use your own command to set your wallpaper
--- theme.wallpaper_cmd = { "nitrogen --restore" }
 theme.wallpaper_cmd = { "/home/franck/Scripts/setbg.sh"}
 
 -- You can use your own layout icons like this:
